@@ -12,16 +12,6 @@ import java.util.stream.Collectors;
 @Repository("CsndraDao")
 public class CsndraDaoImpl extends CsndraConn implements CsndraDao {
 
-    public static void main(String[] args) {
-        CsndraDaoImpl obj = new CsndraDaoImpl();
-//          obj.getConn();
-//        obj.addUser();
-//        obj.getUser("1");
-//        obj.addMoreUsers();
-
-
-    }
-
 
     @Override
     public CsndraModel get(String key, String source) {
@@ -78,7 +68,7 @@ public class CsndraDaoImpl extends CsndraConn implements CsndraDao {
             session.execute("DELETE FROM mykeyspace." + source + " WHERE key = '" + key+"'");
             System.out.println(" Deleted key " + key + " successfully");
         }
-//        System.out.println("Record deleted successfully ");
+
     }
 
     @Override
@@ -97,5 +87,16 @@ public class CsndraDaoImpl extends CsndraConn implements CsndraDao {
         System.out.println(" Truncated table " + source + " successfully");
     }
 
+
+
+    public static void main(String[] args) {
+        CsndraDaoImpl obj = new CsndraDaoImpl();
+//          obj.getConn();
+//        obj.addUser();
+//        obj.getUser("1");
+//        obj.addMoreUsers();
+
+
+    }
 
 }

@@ -24,12 +24,12 @@ public class App {
         App obj = new App();
         obj.config();
         obj.add();
-//        obj.getEmp();
-//        obj.getAllEmp();
-//        obj.updEmp();
-//        obj.getAllEmp();
-//        obj.delEmp();
-//          obj.delAllEmp();
+        obj.getEmp();
+        obj.getAllEmp();
+        obj.updEmp();
+        obj.getAllEmp();
+        obj.delEmp();
+        obj.delAllEmp();
         obj.getAllEmp();
         obj.close();
 
@@ -61,9 +61,8 @@ public class App {
         System.out.println(" Time taken to get Employee record is " + Duration.between(first, first1)
                                                                               .getSeconds() + " seconds ");
 
-        System.out.println(" ");
-        System.out.println(" ");
-
+        System.out.println();
+        System.out.println();
 
         //  slowQuery(2);
         Instant second = Instant.now();
@@ -74,9 +73,8 @@ public class App {
         System.out.println(" Time taken to get Employee record is " + Duration.between(second, second1)
                                                                               .getSeconds() + " seconds ");
 
-        System.out.println(" ");
-        System.out.println(" ");
-
+        System.out.println();
+        System.out.println();
 
         Instant third = Instant.now();
         System.out.println(" Get Employee is Called 3rd time " + third);
