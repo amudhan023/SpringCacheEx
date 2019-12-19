@@ -16,5 +16,5 @@ public interface CsndraDao {
 
 //    void update(String key, String value, String source);
 
-    void delAll(String key, String source);
+    void delAll(String table);
 }

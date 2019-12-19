@@ -7,14 +7,16 @@ public class CsndraModel implements Serializable {
     private static final long serialVersionUID = 1L;
     private String key;
     private String value;
+    private String source;
 
 
     public CsndraModel() {
     }
 
-    public CsndraModel(String key, String value) {
+    public CsndraModel(String key, String value, String source) {
         this.key = key;
         this.value = value;
+        this.source = source;
     }
 
     public String getKey() {
@@ -33,11 +35,20 @@ public class CsndraModel implements Serializable {
         this.value = value;
     }
 
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
     @Override
     public String toString() {
         return "CsndraModel{" +
                 "key='" + key + '\'' +
                 ", value='" + value + '\'' +
+                ", source='" + source + '\'' +
                 '}';
     }
 }

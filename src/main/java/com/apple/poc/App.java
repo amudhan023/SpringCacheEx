@@ -17,7 +17,7 @@ public class App {
 
     EmpService empServ;
     ConfigurableApplicationContext context;
-    final String SOURCE = "EMPLOYEE";
+    final String SOURCE = "source1";
     private static final Logger log = LoggerFactory.getLogger(App.class);
 
     public static void main(String[] args) {
@@ -26,8 +26,8 @@ public class App {
         obj.add();
         obj.getEmp();
         obj.getAllEmp();
-        obj.getAllEmp();
         obj.delEmp();
+        obj.getAllEmp();
         obj.delAllEmp();
         obj.getAllEmp();
         obj.close();
@@ -43,9 +43,9 @@ public class App {
 
     public void add() {
         // Add key value
-        empServ.addEmp("emp001", "Sample_Emp_001", SOURCE);
-        empServ.addEmp("emp002", "Sample_Emp_002", SOURCE);
-        empServ.addEmp("emp003", "Sample_Emp_003", SOURCE);
+        empServ.addEmp("emp001", "Sample_Emp_001", "source1");
+        empServ.addEmp("emp002", "Sample_Emp_002", "source1");
+        empServ.addEmp("emp003", "Sample_Emp_003", "source1");
 
     }
 
@@ -54,7 +54,7 @@ public class App {
         System.out.println(" Get Employee ");
         Instant first = Instant.now();
         System.out.println(" Get Employee is Called 1st time " + first);
-        System.out.println(" 1st time Result : {}" + empServ.get("emp001", SOURCE));
+        System.out.println(" 1st time Result : {}" + empServ.get("emp001", "source1"));
         Instant first1 = Instant.now();
         System.out.println(" Get Employee is returned " + first1);
         System.out.println(" Time taken to get Employee record is " + Duration.between(first, first1)
@@ -66,7 +66,7 @@ public class App {
         //  slowQuery(2);
         Instant second = Instant.now();
         System.out.println(" Get Employee is Called 2nd time " + second);
-        System.out.println(" 2nd time Result : {}" + empServ.get("emp001", SOURCE));
+        System.out.println(" 2nd time Result : {}" + empServ.get("emp001", "source1"));
         Instant second1 = Instant.now();
         System.out.println(" Get Employee is returned " + second1);
         System.out.println(" Time taken to get Employee record is " + Duration.between(second, second1)
@@ -77,7 +77,7 @@ public class App {
 
         Instant third = Instant.now();
         System.out.println(" Get Employee is Called 3rd time " + third);
-        System.out.println(" 3rd time Result : {}" + empServ.get("emp001", SOURCE));
+        System.out.println(" 3rd time Result : {}" + empServ.get("emp001", "source1"));
         Instant third1 = Instant.now();
         System.out.println(" Get Employee is returned " + third1);
         System.out.println(" Time taken to get Employee record is " + Duration.between(third, third1)
@@ -87,7 +87,7 @@ public class App {
     public void getAllEmp() {
         System.out.println(" Printing all the employees from cassandra ... ");
         System.out.println();
-        System.out.println(empServ.getAllEmp(SOURCE));
+        System.out.println(empServ.getAllEmp("source1"));
         System.out.println();
     }
 
@@ -96,11 +96,11 @@ public class App {
 //    }
 
     public void delEmp() {
-        empServ.delEmp("emp001", SOURCE);
+        empServ.delEmp("emp001", "source1"); ;
     }
 
     public void delAllEmp() {
-        empServ.delAllEmp("emp001", SOURCE);
+        empServ.delAllEmp("employee");
     }
 
 

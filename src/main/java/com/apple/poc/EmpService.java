@@ -16,6 +16,6 @@ public interface EmpService {
 
     void delEmp(String key, String source);
 
-    void delAllEmp(String key, String source);
+    void delAllEmp(String table);
 
 }

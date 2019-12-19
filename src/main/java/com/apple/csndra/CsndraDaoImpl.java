@@ -19,9 +19,17 @@ public class CsndraDaoImpl extends CsndraConn implements CsndraDao {
         System.out.println(" Cassandra dao layer called .... ");
         CsndraModel model = null;
         try (CqlSession session = session()) {
-            ResultSet rs = session.execute("SELECT value FROM mykeyspace." + source + " where key = '" + key+"'");
+
+            PreparedStatement prepared = session.prepare(
+                    "SELECT value FROM mykeyspace.EMPLOYEE where key = ? and source = ?");
+
+            BoundStatement bound = prepared.bind(key, source);
+            ResultSet rs = session.execute(bound);
+
+//            ResultSet rs = session.execute("SELECT value FROM mykeyspace.EMPLOYEE  where key = '" + key + "'");
             model = new CsndraModel();
             model.setKey(key);
+            model.setSource(source);
             model.setValue(rs.one()
                              .getString("value"));
 //            System.out.println(" Value " + model.getValue());
@@ -35,16 +43,18 @@ public class CsndraDaoImpl extends CsndraConn implements CsndraDao {
     public List<CsndraModel> getAllEntries(String source) {
 
         List<CsndraModel> ls = null;
-        Function<Row, CsndraModel> mapper = e -> new CsndraModel(e.getString("key"), e.getString("value"));
+        Function<Row, CsndraModel> mapper = e -> new CsndraModel(e.getString("key"), e.getString("value"),
+                                                                 e.getString("source"));
 
         try (CqlSession session = session()) {
-            ResultSet rs = session.execute("SELECT key,value FROM mykeyspace." + source);
+            ResultSet rs = session.execute("SELECT key,value,source FROM mykeyspace.EMPLOYEE");
             ls = rs.all()
                    .stream()
                    .map(mapper)
                    .collect(Collectors.toList());
 
-//            rs.forEach(e -> System.out.println("key -> " + e.getString("key") + "  Value -> " + e.getString("value")));
+//            rs.forEach(e -> System.out.println("key -> " + e.getString("key") + "  Value -> " + e.getString
+//            ("value")));
         }
         return ls;
     }
@@ -54,9 +64,9 @@ public class CsndraDaoImpl extends CsndraConn implements CsndraDao {
 
         try (CqlSession session = session()) {
             PreparedStatement prepared = session.prepare(
-                    "INSERT INTO mykeyspace." + source + "(key, value) VALUES (?,?)");
+                    "INSERT INTO mykeyspace.EMPLOYEE (key, value, source) VALUES (?,?,?)");
 
-            BoundStatement bound = prepared.bind(key, value);
+            BoundStatement bound = prepared.bind(key, value, source);
             session.execute(bound);
             System.out.println(" Added key " + key + " successfully");
         }
@@ -65,7 +75,11 @@ public class CsndraDaoImpl extends CsndraConn implements CsndraDao {
     @Override
     public void delete(String key, String source) {
         try (CqlSession session = session()) {
-            session.execute("DELETE FROM mykeyspace." + source + " WHERE key = '" + key+"'");
+            PreparedStatement prepared = session.prepare(
+                    "DELETE FROM mykeyspace.EMPLOYEE  where key = ? and source = ?");
+
+            BoundStatement bound = prepared.bind(key, source);
+            session.execute(bound);
             System.out.println(" Deleted key " + key + " successfully");
         }
 
@@ -74,19 +88,18 @@ public class CsndraDaoImpl extends CsndraConn implements CsndraDao {
 //    @Override
 //    public void update(String key, String value, String source) {
 //        try (CqlSession session = session()) {
-//            session.execute("UPDATE mykeyspace." + source + " SET value = '" + value + "' where key = '" + key+"'");
+//            session.execute("UPDATE mykeyspace.EMPLOYEE  SET value = '" + value + "' where key = '" + key+"'");
 //        }
 //        System.out.println("Record updated successfully ");
 //    }
 
     @Override
-    public void delAll(String key, String source) {
+    public void delAll(String table) {
         try (CqlSession session = session()) {
-            session.execute("TRUNCATE mykeyspace." + source);
+            session.execute("TRUNCATE mykeyspace." + table);
         }
-        System.out.println(" Truncated table " + source + " successfully");
+        System.out.println(" Truncated table EMPLOYEE  successfully");
     }
-
 
 
     public static void main(String[] args) {

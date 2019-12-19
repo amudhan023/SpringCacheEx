@@ -23,9 +23,8 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
-    @Cacheable(value = "emplCache", key = "#key")
+    @Cacheable(value = "emplCache", key = "")
     public CsndraModel get(String key, String source) {
-
 
         return cass.get(key, source);
     }
@@ -48,8 +47,8 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
-    public void delAllEmp(String key, String source) {
-        cass.delAll(key, source);
+    public void delAllEmp(String table) {
+        cass.delAll(table);
     }
 
 
