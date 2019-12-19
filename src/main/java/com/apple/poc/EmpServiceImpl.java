@@ -36,11 +36,11 @@ public class EmpServiceImpl implements EmpService {
         return cass.getAllEntries(source);
     }
 
-
-    @Override
-    public void updEmp(String key, String value, String source) {
-        cass.update(key, value, source);
-    }
+//
+//    @Override
+//    public void updEmp(String key, String value, String source) {
+//        cass.update(key, value, source);
+//    }
 
     @Override
     public void delEmp(String key, String source) {

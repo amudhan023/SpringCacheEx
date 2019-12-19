@@ -12,7 +12,7 @@ public interface EmpService {
 
     void addEmp(String key, String value, String source);
 
-    void updEmp(String key, String value, String source);
+//    void updEmp(String key, String value, String source);
 
     void delEmp(String key, String source);
 

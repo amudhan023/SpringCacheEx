@@ -70,14 +70,14 @@ public class CsndraDaoImpl extends CsndraConn implements CsndraDao {
         }
 
     }
-
-    @Override
-    public void update(String key, String value, String source) {
-        try (CqlSession session = session()) {
-            session.execute("UPDATE mykeyspace." + source + " SET value = '" + value + "' where key = '" + key+"'");
-        }
-        System.out.println("Record updated successfully ");
-    }
+//
+//    @Override
+//    public void update(String key, String value, String source) {
+//        try (CqlSession session = session()) {
+//            session.execute("UPDATE mykeyspace." + source + " SET value = '" + value + "' where key = '" + key+"'");
+//        }
+//        System.out.println("Record updated successfully ");
+//    }
 
     @Override
     public void delAll(String key, String source) {
