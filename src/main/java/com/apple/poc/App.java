@@ -26,7 +26,6 @@ public class App {
         obj.add();
         obj.getEmp();
         obj.getAllEmp();
-        obj.updEmp();
         obj.getAllEmp();
         obj.delEmp();
         obj.delAllEmp();
@@ -92,9 +91,9 @@ public class App {
         System.out.println();
     }
 
-    public void updEmp() {
-        empServ.updEmp("emp001", "Sample_Updated_Emp_001", SOURCE);
-    }
+//    public void updEmp() {
+//        empServ.updEmp("emp001", "Sample_Updated_Emp_001", SOURCE);
+//    }
 
     public void delEmp() {
         empServ.delEmp("emp001", SOURCE);
